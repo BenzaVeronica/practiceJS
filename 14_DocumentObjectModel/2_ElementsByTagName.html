@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Document Object Model</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+
+</head>
+
+<body>
+  <header class="header" id="header">
+    <a href="./"> 14 The Document Object Model</a>
+    <a href="../15_HandlingEvents/"> 15 Handling Events</a>
+    <a href="../17_DrawingOnCanvas/"> 17 Drawing on Canvas</a>
+  </header>
+  <div class="links">
+    <a href="./1_BuildTable.html"> 1 Build Table</a>
+    <a href="./2_ElementsByTagName.html"> 2 Elements By TagName</a>
+    <a href="./3_CatHat.html"> 3 Cat Hat</a>
+  </div>
+  <h1>Heading with a <span>span</span> element.</h1>
+  <p>A paragraph with <span>one</span>, <span>two</span>
+    spans.</p>
+</body>
+
+<script>
+  function byTagName(node, tagName) {
+    let array = [];
+    tagName = tagName.toUpperCase();
+
+    function recursiveFun(node) {
+      for (let i = 0; i < node.childNodes.length; i++) {
+        let child = node.childNodes[i];
+        if (child.nodeType == document.ELEMENT_NODE) {
+          if (child.nodeName == tagName) array.push(child);
+          recursiveFun(child);
+        }
+      }
+    }
+    recursiveFun(node);
+    return array;
+  }
+
+  console.log(`console.log(byTagName(document.body, "h1").length); // 1
+  console.log(byTagName(document.body, "span").length); // 3
+  let para = document.querySelector("p");
+  console.log(byTagName(para, "span").length); // 2`);
+  console.log(byTagName(document.body, "h1").length); // 1
+  console.log(byTagName(document.body, "span").length); // 3
+  let para = document.querySelector("p");
+  console.log(byTagName(para, "span").length); // 2
+</script>
+
+</html>

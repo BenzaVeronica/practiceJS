@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Document Object Model</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <style>
+    .trail {
+      position: absolute;
+      height: 6px;
+      width: 6px;
+      border-radius: 3px;
+      background: teal;
+    }
+
+    body {
+      height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <a href="../14_DocumentObjectModel/"> 14 The Document Object Model</a>
+    <a href="../"> 15 Handling Events</a>
+    <a href="../17_DrawingOnCanvas/"> 17 Drawing on Canvas</a>
+  </header>
+  <div class="links">
+    <a href="./1_Balloon.html"> 1 Balloon</a>
+    <a href="./2_MouseTrail.html"> 2 Mouse Trail</a>
+    <a href="./3_Tabs.html"> 3 Tabs</a>
+  </div>
+</body>
+
+<script>
+  let dots = [];
+  for (let i = 0; i < 10; i++) {
+    let node = document.createElement("div");
+    node.className = "trail";
+    document.body.appendChild(node);
+    dots.push(node);
+  }
+  let currentDot = 0;
+
+  window.addEventListener("mousemove", event => {
+    let dot = dots[currentDot];
+    dot.style.left = (event.pageX - 3) + "px";
+    dot.style.top = (event.pageY - 3) + "px";
+    currentDot = (currentDot + 1) % dots.length;
+  });
+</script>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>HTTP and Forms</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <script src="./18_http.js"></script>
+</head>
+
+<body>
+  <div class="links">
+    <a href="./1_ContentNegotiation.html"> 1 Content Negotiation</a>
+    <a href="./"> 2 JS Workbench</a>
+    <a href="./3_Conway’sGameOfLife.html"> 3 Conway’s Game Of Life Ball</a>
+  </div>
+  <div id="console">
+  </div>
+  <textarea id="code">return "hi";</textarea>
+  <button id="button">Run</button>
+  <pre id="output"></pre>
+</body>
+
+<script>
+  document.querySelector("#button").addEventListener("click", () => {
+    let code = document.querySelector("#code").value;
+    let outputNode = document.querySelector("#output");
+    try {
+      let result = Function(code)();
+      outputNode.innerText = String(result);
+    } catch (e) {
+      outputNode.innerText = "Error: " + e;
+    }
+  });
+
+  let divConsole = document.getElementById('console');
+  divConsole.innerHTML = '';
+  divConsole.innerHTML += `<h4>JS Workbench</h4>`;
+  divConsole.innerHTML += `<pre>Build an interface that allows people to type and run pieces of JavaScript code.
+Put a button next to a <textarea> field that, when pressed, uses the Function constructor we saw in Chapter 10 to wrap the text in a function and call it. Convert the return value of the function, or any error it raises, to a string and display it below the text field..</pre>`;
+</script>
+
+</html>

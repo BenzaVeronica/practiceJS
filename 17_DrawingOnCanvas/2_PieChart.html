@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Document Object Model</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+  <header class="header" id="header">
+    <a href="../14_DocumentObjectModel/"> 14 The Document Object Model</a>
+    <a href="../15_HandlingEvents/"> 15 Handling Events</a>
+    <a href="./"> 17 Drawing on Canvas</a>
+  </header>
+  <div class="links">
+    <a href="./1_Shapes.html"> 1 Shapes</a>
+    <a href="./2_PieChart.html"> 2 Pie Chartuse</a>
+    <a href="./3_BouncingBall.html"> 3 Bouncing Ball</a>
+  </div>
+  <canvas></canvas>
+</body>
+
+<script>
+
+  const RESULTS = [
+    { name: 'Satisfied', count: 1043, color: 'lightblue' },
+    { name: 'Neutral', count: 563, color: 'lightgreen' },
+    { name: 'Unsatisfied', count: 510, color: 'pink' },
+    { name: 'No comment', count: 175, color: 'silver' },
+  ];
+
+  const WIDTH = 600;
+  const HEIGHT = 300;
+  const DPI_WIDTH = WIDTH * 1;
+  const DPI_HEIGHT = HEIGHT * 1;
+  let canva = document.querySelector("canvas");
+  let cx = canva.getContext("2d");
+  canva.style.width = WIDTH + 'px';
+  canva.style.height = HEIGHT + 'px';
+  canva.width = DPI_WIDTH;
+  canva.height = DPI_HEIGHT;
+
+  let total = RESULTS.reduce(function (sum, choice) {
+    return sum + choice.count;
+  }, 0);
+
+  let currentAngle = -0.5 * Math.PI;
+  let centerX = 300, centerY = 150;
+
+  RESULTS.forEach(function (result) {
+    let sliceAngle = (result.count / total) * 2 * Math.PI;
+    cx.beginPath();
+    cx.arc(centerX, centerY, 100,
+      currentAngle, currentAngle + sliceAngle);
+
+    let middleAngle = currentAngle + 0.5 * sliceAngle;
+    let textX = Math.cos(middleAngle) * 120 + centerX;
+    let textY = Math.sin(middleAngle) * 120 + centerY;
+    cx.textBaseLine = "middle";
+    if (Math.cos(middleAngle) > 0) {
+      cx.textAlign = "left";
+    } else {
+      cx.textAlign = "right";
+    }
+    cx.font = "15px sans-serif";
+    cx.fillStyle = "white";
+    cx.fillText(result.name, textX, textY);
+
+    currentAngle += sliceAngle;
+    cx.lineTo(centerX, centerY);
+    cx.fillStyle = result.color;
+    cx.fill();
+  });
+</script>
+
+</html>

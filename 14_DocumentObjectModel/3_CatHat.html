@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Document Object Model</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <style>
+    #cat {
+      filter: invert();
+    }
+
+    .imgs {
+      position: absolute;
+      top: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <a href="./"> 14 The Document Object Model</a>
+    <a href="../15_HandlingEvents/"> 15 Handling Events</a>
+    <a href="../17_DrawingOnCanvas/"> 17 Drawing on Canvas</a>
+  </header>
+  <div class="links">
+    <a href="./1_BuildTable.html"> 1 Build Table</a>
+    <a href="./2_ElementsByTagName.html"> 2 Elements By TagName</a>
+    <a href="./3_CatHat.html"> 3 Cat Hat</a>
+  </div>
+  <div class="imgs">
+    <img src="http://eloquentjavascript.net/img/cat.png" id="cat" style="position: absolute;">
+    <img src="http://eloquentjavascript.net/img/hat.png" id="hat" style="position: absolute;">
+  </div>
+</body>
+
+<script>
+  let cat = document.querySelector("#cat");
+  let hat = document.querySelector("#hat");
+
+  let angle = 0;
+  let lastTime = null;
+  function animate(time) {
+    if (lastTime != null) angle += (time - lastTime) * 0.001;
+    lastTime = time;
+    let a = 70;
+    let b = a * 3;
+    let c = 300;
+    cat.style.top = (Math.sin(angle) * a + a) + "px";
+    cat.style.left = (Math.cos(angle) * b + c) + "px";
+    hat.style.top = (Math.sin(angle + Math.PI) * a + a) + "px";
+    hat.style.left = (Math.cos(angle + Math.PI) * b + c) + "px";
+
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+</script>
+
+</html>

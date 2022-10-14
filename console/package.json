@@ -5,8 +5,12 @@
   "main": "10_1_RoadsModule.js",
   "scripts": {
     "chapter10": "node 10_1_RoadsModule.js",
+    "chapter11": "node 11_1_TrackingScalpel.js && node 11_2_BuildingPromise.js",
     "task20_1": "node 20_1_SearchTool.js exports data.js 11_1_TrackingScalpel.js 11_2_BuildingPromise.js"
   },
   "author": "Benza Veronica",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mime": "^3.0.0"
+  }
 }

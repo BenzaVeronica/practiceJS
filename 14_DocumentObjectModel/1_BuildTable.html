@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Document Object Model</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+
+</head>
+
+<body>
+  <header class="header" id="header">
+    <a href="./"> 14 The Document Object Model</a>
+    <a href="../15_HandlingEvents/"> 15 Handling Events</a>
+    <a href="../17_DrawingOnCanvas/"> 17 Drawing on Canvas</a>
+  </header>
+  <div class="links">
+    <a href="./1_BuildTable.html"> 1 Build Table</a>
+    <a href="./2_ElementsByTagName.html"> 2 Elements By TagName</a>
+    <a href="./3_CatHat.html"> 3 Cat Hat</a>
+  </div>
+  <h1>Mountains</h1>
+  <div id="mountains"></div>
+</body>
+<script>
+  const MOUNTAINS = [
+    { name: "Kilimanjaro", height: 5895, place: "Tanzania" },
+    { name: "Everest", height: 8848, place: "Nepal" },
+    { name: "Mount Fuji", height: 3776, place: "Japan" },
+    { name: "Vaalserberg", height: 323, place: "Netherlands" },
+    { name: "Denali", height: 6168, place: "United States" },
+    { name: "Popocatepetl", height: 5465, place: "Mexico" },
+    { name: "Mont Blanc", height: 4808, place: "Italy/France" }
+  ];
+
+  function buildTable(array) {
+    let table = document.createElement("table");
+    let tr = document.createElement("tr");
+
+    let headers = Object.keys(array[0]);
+    headers.forEach((el) => {
+      let th = document.createElement("th");
+      th.appendChild(document.createTextNode(el));
+      tr.appendChild(th);
+    });
+    table.appendChild(tr);
+
+    array.forEach((object) => {
+      let row = document.createElement("tr");
+      headers.forEach((el) => {
+        let cell = document.createElement("td");
+        cell.appendChild(document.createTextNode(object[el]));
+        if (typeof object[el] == "number") {
+          cell.style.textAlign = "right";
+        }
+        row.appendChild(cell);
+      });
+      table.appendChild(row);
+    });
+
+    return table;
+  }
+
+  document.querySelector("#mountains")
+    .appendChild(buildTable(MOUNTAINS));
+</script>
+
+</html>

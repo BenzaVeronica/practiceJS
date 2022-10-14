@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Document Object Model</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+  <header class="header" id="header">
+    <a href="../14_DocumentObjectModel/"> 14 The Document Object Model</a>
+    <a href="../15_HandlingEvents/"> 15 Handling Events</a>
+    <a href="./"> 17 Drawing on Canvas</a>
+  </header>
+  <div class="links">
+    <a href="./1_Shapes.html"> 1 Shapes</a>
+    <a href="./2_PieChart.html"> 2 Pie Chartuse</a>
+    <a href="./3_BouncingBall.html"> 3 Bouncing Ball</a>
+  </div>
+  <canvas></canvas>
+</body>
+
+<script>
+  const WIDTH = 500;
+  const HEIGHT = 300;
+  const PADDING = 50;
+  const PADDIV2 = PADDING / 2;
+  const DPI_WIDTH = WIDTH * 1;
+  const DPI_HEIGHT = HEIGHT * 1;
+  let canva = document.querySelector("canvas");
+  let cx = canva.getContext("2d");
+  canva.style.width = WIDTH + 'px';
+  canva.style.height = HEIGHT + 'px';
+  canva.width = DPI_WIDTH;
+  canva.height = DPI_HEIGHT;
+
+  let lastTime = null;
+  function frame(time) {
+    if (lastTime != null) {
+      updateAnimation(Math.min(100, time - lastTime) / 1000);
+    }
+    lastTime = time;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  let x = 100, y = HEIGHT - 100;
+  let radius = 10;
+  let speedX = 100, speedY = 60;
+
+  function updateAnimation(step) {
+    cx.clearRect(0, 0, WIDTH, HEIGHT);
+    cx.strokeStyle = "blue";
+    cx.lineWidth = 4;
+    cx.strokeRect(PADDIV2, PADDIV2, WIDTH - PADDING, HEIGHT - PADDING);
+
+    x += step * speedX;
+    y += step * speedY;
+    if (x < PADDIV2 + radius || x > WIDTH - PADDIV2 - radius) speedX = -speedX;
+    if (y < PADDIV2 + radius || y > HEIGHT - PADDIV2 - radius) speedY = -speedY;
+    cx.fillStyle = "red";
+    cx.beginPath();
+    cx.arc(x, y, radius, 0, 7);
+    cx.fill();
+  }
+</script>
+
+</html>

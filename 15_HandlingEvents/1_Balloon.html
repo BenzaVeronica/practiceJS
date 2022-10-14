@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Document Object Model</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+
+</head>
+
+<body>
+  <header class="header" id="header">
+    <a href="../14_DocumentObjectModel/"> 14 The Document Object Model</a>
+    <a href="../"> 15 Handling Events</a>
+    <a href="../17_DrawingOnCanvas/"> 17 Drawing on Canvas</a>
+  </header>
+  <div class="links">
+    <a href="./1_Balloon.html"> 1 Balloon</a>
+    <a href="./2_MouseTrail.html"> 2 Mouse Trail</a>
+    <a href="./3_Tabs.html"> 3 Tabs</a>
+  </div>
+  <p>🎈</p>
+</body>
+
+<script>
+  let p = document.querySelector("p");
+  let size;
+  function setSize(newSize) {
+    size = newSize;
+    p.style.fontSize = size + "px";
+  }
+  setSize(20);
+
+  function handler(event) {
+    let k = 0.1;
+    if (event.key == "ArrowUp") {
+      if (size > 70) {
+        p.textContent = "💥";
+        document.body.removeEventListener("keydown", handler);
+      } else {
+        setSize(size * (1 + k));
+        event.preventDefault();
+      }
+    } else if (event.key == "ArrowDown") {
+      setSize(size * (1 - k));
+      event.preventDefault();
+    }
+  }
+  document.body.addEventListener("keydown", handler);
+</script>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Document Object Model</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <style>
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <a href="../14_DocumentObjectModel/"> 14 The Document Object Model</a>
+    <a href="../"> 15 Handling Events</a>
+    <a href="../17_DrawingOnCanvas/"> 17 Drawing on Canvas</a>
+  </header>
+  <div class="links">
+    <a href="./1_Balloon.html"> 1 Balloon</a>
+    <a href="./2_MouseTrail.html"> 2 Mouse Trail</a>
+    <a href="./3_Tabs.html"> 3 Tabs</a>
+  </div>
+  <tab-panel>
+    <div data-tabname="One">14 Too bad! Same old story! Once you’ve finished building your house you
+      notice you’ve accidentally learned something that
+      you really should have known—before you started.
+      Friedrich Nietzsche, Beyond Good and Evil</div>
+    <div data-tabname="Two">15 You have power over your mind—not outside events. Realize this, and you
+      will find strength.
+      Marcus Aurelius, Meditations</div>
+    <div data-tabname="Three">17 Drawing is deception.
+      M.C. Escher, cited by Bruno Ernst in The Magic Mirror of M.C. Escher</div>
+  </tab-panel>
+</body>
+
+<script>
+  function asTabs(node) {
+    let tabs = Array.from(node.children).map((node) => {
+      let btn = document.createElement('button');
+      btn.textContent = node.getAttribute('data-tabname');
+      let tab = { node, btn };
+      btn.addEventListener('click', () => selectTab(tab));
+      return tab;
+    });
+
+    let tabList = document.createElement('div');
+    tabList.classList.add('tabs');
+    for (let { btn } of tabs) tabList.appendChild(btn);
+    node.insertBefore(tabList, node.firstChild);
+
+    function selectTab(selectedTab) {
+      for (let tab of tabs) {
+        let selected = tab == selectedTab;
+        tab.node.style.display = selected ? '' : 'none';
+        tab.btn.style.color = selected ? 'red' : '';
+      }
+    }
+    selectTab(tabs[0]);
+  }
+
+  asTabs(document.querySelector('tab-panel'));
+</script>
+
+</html>
