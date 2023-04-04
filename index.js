@@ -24,7 +24,7 @@ document.querySelector('#header').addEventListener('click', (event) => {
     }
   });
   event.target.classList.add('current');
-  if (event.path[0].nodeName === 'BUTTON') {
+  if (event.target.nodeName === 'BUTTON') {
     const id = event.target.getAttribute('data-id');
     if (!id) return;
     let n = parseInt(id);
